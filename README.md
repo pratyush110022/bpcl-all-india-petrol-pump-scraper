@@ -1,73 +1,61 @@
-﻿# BPCL All India Petrol Pump Scraper
+# BPCL Fuel Station Intelligence Scraper
 
-Python automation project for collecting and consolidating BPCL petrol pump locations across India.
+Python automation for collecting BPCL retail fuel-station records through the BPCL API, using geographic grid searches, concurrent requests, token refresh, deduplication, and Excel export.
 
-## Overview
+## How it works
 
-This repository contains the Python script used for the project.
-The actual collection methods, geographic coverage, and output depend
-on the implementation and source availability.
+1. Reads API credentials from environment variables and obtains an OAuth access token using the client-credentials flow.
+2. Builds a latitude/longitude grid from the configured geographic bounds and grid step.
+3. Sends concurrent station-search requests around grid points, using a configured search radius.
+4. Refreshes the token if a request returns HTTP 401 and retries failed searches.
+5. Deduplicates stations by the source roId and saves the resulting records to Excel.
 
-## Features
+## Data fields
 
-- Geographic grid-based searches across India
-- Concurrent API requests
-- Retry handling and access-token refresh
-- Outlet deduplication and Excel export
+The output includes fields when supplied by the API:
 
-## Technology Stack
+- Outlet IDs and names: RO_ID, Name, Display Name
+- Address fields: formatted address, lines, district, town, state, and PIN
+- Latitude, longitude, phone, cell, and email
+- Fuel availability, amenities, and weekday fuel prices
 
-- Python
-- Data collection and processing
-- Structured data handling
-- Excel integration, where supported by the script
+## Requirements
 
-## Repository Structure
+- Python 3.10 or a compatible version
+- Packages in requirements.txt
+- openpyxl for Excel export
 
-```
-bpcl-all-india-petrol-pump-scraper/
-|-- bpcl_all_india_scraper.py
-|-- README.md
-|-- requirements.txt
-|-- .gitignore
-```
+    python -m venv .venv
+    .venv/Scripts/Activate.ps1
+    pip install -r requirements.txt openpyxl
 
-## Setup
+## Credentials
 
-Use Python 3.10 or a compatible version supported by the script.
+The script requires two environment variables. Set them in the current PowerShell session before starting the scraper:
 
-Create and activate a virtual environment:
+    $env:BPCL_CLIENT_ID = "your_client_id"
+    $env:BPCL_CLIENT_SECRET = "your_client_secret"
 
-```powershell
-python -m venv .venv
-.venv\Scripts\Activate.ps1
-```
+Use credentials issued for authorized API access. Do not hard-code secrets or commit them to the repository.
 
-Install dependencies:
+## Configuration and run
 
-```powershell
-pip install -r requirements.txt
-```
+Review the constants near the top of bpcl_all_india_scraper.py:
 
-## Run
+- RADIUS — search radius in meters
+- GRID_STEP — spacing between geographic grid points
+- MAX_WORKERS — maximum concurrent workers
+- LAT_MIN, LAT_MAX, LON_MIN, LON_MAX — search-grid bounds
+- OUTPUT — output workbook filename
 
-```powershell
-python "bpcl_all_india_scraper.py"
-```
+Run:
 
-Review the script configuration before running it. If authentication
-is required, use authorized credentials and keep secrets outside
-the source code.
+    python bpcl_all_india_scraper.py
 
-## Data and Usage Notes
+The script writes BPCL_All_India_Stations.xlsx to the current working directory and prints the grid and station counts.
 
-- Data completeness depends on the source and collection process.
-- Check the source provider's terms and permissions.
-- Do not publish confidential data or credentials.
-- Treat collected data as a snapshot unless freshness is verified.
+## Operational notes
 
-## Author
-
-**Pratyush Das**
-
-GitHub: https://github.com/pratyush110022
+- The grid provides approximate spatial coverage; completeness depends on API behavior, grid spacing, radius, and API permissions.
+- High concurrency can increase request volume; adjust MAX_WORKERS and grid parameters responsibly.
+- Fuel availability, amenity, and price data reflect the API response captured during the run and should not be treated as guaranteed current prices.
