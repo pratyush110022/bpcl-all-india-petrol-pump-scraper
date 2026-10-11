@@ -59,3 +59,7 @@ The script writes BPCL_All_India_Stations.xlsx to the current working directory 
 - The grid provides approximate spatial coverage; completeness depends on API behavior, grid spacing, radius, and API permissions.
 - High concurrency can increase request volume; adjust MAX_WORKERS and grid parameters responsibly.
 - Fuel availability, amenity, and price data reflect the API response captured during the run and should not be treated as guaranteed current prices.
+
+## Synthetic sample data
+
+[`sample_synthetic_12_records.csv`](sample_synthetic_12_records.csv) contains **12 synthetic test records** using the scraper's output schema. These records were generated for schema inspection and portfolio/demo purposes; they were not collected from the source website or API. Names and addresses are fictional, contact details and example.com links are placeholders, coordinates are illustrative, and ratings/prices are not real or current. Do not use them for real-world navigation or pricing decisions.
