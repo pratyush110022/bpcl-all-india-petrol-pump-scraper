@@ -63,3 +63,7 @@ The script writes BPCL_All_India_Stations.xlsx to the current working directory 
 ## Synthetic sample data
 
 [`sample_synthetic_12_records.csv`](sample_synthetic_12_records.csv) contains **12 synthetic test records** using the scraper's output schema. These records were generated for schema inspection and portfolio/demo purposes; they were not collected from the source website or API. Names and addresses are fictional, contact details and example.com links are placeholders, coordinates are illustrative, and ratings/prices are not real or current. Do not use them for real-world navigation or pricing decisions.
+
+## Sample workbook
+
+[BPCL_Sample.xlsx](BPCL_Sample.xlsx) is the workbook sample included in this repository for reviewing the BPCL outlet data format. Check the workbook's sheets, source, and collection date before relying on its contents. Outlet details, fuel availability, amenities, and prices may be incomplete or out of date. Confirm you have permission to publish the workbook before redistributing it.
