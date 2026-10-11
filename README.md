@@ -1,38 +1,73 @@
 ﻿# BPCL All India Petrol Pump Scraper
 
-A Python automation project that collects BPCL retail outlet information
-using the BPCL retail locator API.
+Python automation project for collecting and consolidating BPCL petrol pump locations across India.
+
+## Overview
+
+This repository contains the Python script used for the project.
+The actual collection methods, geographic coverage, and output depend
+on the implementation and source availability.
 
 ## Features
-- Geographic grid-based search across India
+
+- Geographic grid-based searches across India
 - Concurrent API requests
 - Retry handling and access-token refresh
-- Duplicate removal using retail outlet IDs
-- Excel export with state-wise sorting
+- Outlet deduplication and Excel export
 
-## Technology
-Python, Requests, Pandas, ThreadPoolExecutor, tqdm, OpenPyXL
+## Technology Stack
 
-## Installation
-Create a virtual environment and install dependencies:
+- Python
+- Data collection and processing
+- Structured data handling
+- Excel integration, where supported by the script
 
-    python -m venv .venv
-    .venv\Scripts\Activate.ps1
-    pip install -r requirements.txt
+## Repository Structure
 
-## Credentials
-Set authorized API credentials in PowerShell:
+```
+bpcl-all-india-petrol-pump-scraper/
+|-- bpcl_all_india_scraper.py
+|-- README.md
+|-- requirements.txt
+|-- .gitignore
+```
 
-    $env:BPCL_CLIENT_ID = "your_client_id"
-    $env:BPCL_CLIENT_SECRET = "your_client_secret"
+## Setup
+
+Use Python 3.10 or a compatible version supported by the script.
+
+Create and activate a virtual environment:
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+```
+
+Install dependencies:
+
+```powershell
+pip install -r requirements.txt
+```
 
 ## Run
 
-    python bpcl_all_india_scraper.py
+```powershell
+python "bpcl_all_india_scraper.py"
+```
 
-## Output
-BPCL_All_India_Stations.xlsx
+Review the script configuration before running it. If authentication
+is required, use authorized credentials and keep secrets outside
+the source code.
 
-Coverage and results depend on API access, response availability,
-and the configured search grid. Use the API in accordance with
-the provider's applicable terms.
+## Data and Usage Notes
+
+- Data completeness depends on the source and collection process.
+- Check the source provider's terms and permissions.
+- Do not publish confidential data or credentials.
+- Treat collected data as a snapshot unless freshness is verified.
+
+## Author
+
+**Pratyush Das**
+
+GitHub: https://github.com/pratyush110022

@@ -1,4 +1,5 @@
-﻿requests
+﻿# Generated from recognizable imports.
+# Review this list against the script before installing.
 pandas
+requests
 tqdm
-openpyxl
